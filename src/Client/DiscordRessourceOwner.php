@@ -1,5 +1,7 @@
 <?php
 
+namespace Client;
+
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
 
 class DiscordRessourceOwner implements ResourceOwnerInterface
