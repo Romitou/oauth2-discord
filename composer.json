@@ -1,0 +1,18 @@
+{
+    "name": "romitou/oauth2-discord",
+    "require": {
+        "league/oauth2-client": "^2.6"
+    },
+    "license": "GPL-3.0-only",
+    "authors": [
+        {
+            "name": "Romitou",
+            "email": "romitou@protonmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Romitou\\OAuth2\\Client\\": "src/"
+        }
+    }
+}
