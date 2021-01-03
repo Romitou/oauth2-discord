@@ -1,8 +1,6 @@
 {
     "name": "romitou/oauth2-discord",
-    "require": {
-        "league/oauth2-client": "^2.6"
-    },
+    "description": "This package provides Discord's OAuth 2 and supports League's OAuth 2.0 client.",
     "license": "GPL-3.0-only",
     "authors": [
         {
@@ -10,6 +8,9 @@
             "email": "romitou@protonmail.com"
         }
     ],
+    "require": {
+        "league/oauth2-client": "^2.6"
+    },
     "autoload": {
         "psr-4": {
             "Romitou\\OAuth2\\Client\\": "src/"
