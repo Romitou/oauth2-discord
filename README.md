@@ -3,6 +3,10 @@
 
 <br />
 
+## 🚀 Download and installation
+
+This package is available on [Packagist](https://packagist.org/packages/romitou/oauth2-discord). You can install it directly via Composer with the command `composer req romitou/oauth2-discord`.
+
 ## 📖 Example
 ```php
 <?php
