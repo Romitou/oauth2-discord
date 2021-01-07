@@ -24,9 +24,26 @@ class DiscordRessourceOwner implements ResourceOwnerInterface
         return $this->response['id'];
     }
 
+    /**
+     * Returns the username of the authorized resource owner.
+     *
+     * @return string|null
+     */
     public function getUsername(): ?string
     {
         return $this->response['username'];
+    }
+
+    /**
+     * Returns the complete username of the authorized resource owner, including his discriminator.
+     * It is built with : <username>#<discriminator>.
+     *
+     * @return string|null
+     */
+    public function getCompleteUsername(): ?string
+    {
+        if ($this->getUsername() == null || $this->getDiscriminator() == null) return null;
+        return $this->getUsername() . '#' . $this->getDiscriminator();
     }
 
     /**
