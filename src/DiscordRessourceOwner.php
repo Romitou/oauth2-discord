@@ -3,9 +3,13 @@
 namespace Romitou\OAuth2\Client;
 
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
+use League\OAuth2\Client\Tool\ArrayAccessorTrait;
+use InvalidArgumentException;
 
 class DiscordRessourceOwner implements ResourceOwnerInterface
 {
+
+    use ArrayAccessorTrait;
 
     private array $response;
 
@@ -21,7 +25,7 @@ class DiscordRessourceOwner implements ResourceOwnerInterface
      */
     public function getId(): ?string
     {
-        return $this->response['id'];
+        return $this->getValueByKey($this->response, 'id');
     }
 
     /**
@@ -31,7 +35,7 @@ class DiscordRessourceOwner implements ResourceOwnerInterface
      */
     public function getUsername(): ?string
     {
-        return $this->response['username'];
+        return $this->getValueByKey($this->response, 'username');
     }
 
     /**
@@ -55,7 +59,7 @@ class DiscordRessourceOwner implements ResourceOwnerInterface
     public function getAvatarUrl(): ?string
     {
         if ($this->getId() == null || $this->getAvatarHash() == null) return null;
-        return DiscordProvider::DISCORD_CDN . '/' . $this->getId() . '/' . $this->getAvatarHash() . '.png';
+        return DiscordProvider::DISCORD_CDN . '/' . $this->getId() . '/' . $this->getAvatarHash() . $extension;
     }
 
     /**
@@ -65,7 +69,7 @@ class DiscordRessourceOwner implements ResourceOwnerInterface
      */
     public function getAvatarHash(): ?string
     {
-        return $this->response['avatar'];
+        return $this->getValueByKey($this->response, 'avatar');
     }
 
     /**
@@ -75,7 +79,7 @@ class DiscordRessourceOwner implements ResourceOwnerInterface
      */
     public function getDiscriminator(): ?string
     {
-        return $this->response['discriminator'];
+        return $this->getValueByKey($this->response, 'discriminator');
     }
 
     /**
@@ -85,7 +89,7 @@ class DiscordRessourceOwner implements ResourceOwnerInterface
      */
     public function getPublicFlags(): ?int
     {
-        return $this->response['public_flags'];
+        return $this->getValueByKey($this->response, 'public_flags');
     }
 
     /**
@@ -95,17 +99,18 @@ class DiscordRessourceOwner implements ResourceOwnerInterface
      */
     public function getFlags(): ?int
     {
-        return $this->response['flags'];
+        return $this->getValueByKey($this->response, 'flags');
     }
 
     /**
      * Returns the email of the authorized resource owner.
+     * You can only retrieve this data by requesting OAuth with email scope.
      *
      * @return string|null
      */
     public function getEmail(): ?string
     {
-        return $this->response['email'];
+        return $this->getValueByKey($this->response, 'email');
     }
 
     /**
@@ -115,7 +120,7 @@ class DiscordRessourceOwner implements ResourceOwnerInterface
      */
     public function isVerified(): ?bool
     {
-        return $this->response['verified'];
+        return $this->getValueByKey($this->response, 'verified');
     }
 
     /**
@@ -125,7 +130,7 @@ class DiscordRessourceOwner implements ResourceOwnerInterface
      */
     public function getLocale(): ?string
     {
-        return $this->response['locale'];
+        return $this->getValueByKey($this->response, 'locale');
     }
 
     /**
@@ -135,7 +140,7 @@ class DiscordRessourceOwner implements ResourceOwnerInterface
      */
     public function hasMfaEnabled(): ?bool
     {
-        return $this->response['mfa_enabled'] === true;
+        return $this->getValueByKey($this->response, 'mfa_enabled');
     }
 
     /**
@@ -148,7 +153,7 @@ class DiscordRessourceOwner implements ResourceOwnerInterface
      */
     public function getPremiumType(): ?int
     {
-        return $this->response['premium_type'];
+        return $this->getValueByKey($this->response, 'premium_type');
     }
 
     /**
