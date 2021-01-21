@@ -53,11 +53,15 @@ class DiscordRessourceOwner implements ResourceOwnerInterface
     /**
      * Returns the avatar URL of the authorized resource owner.
      * It is built with the resource owner's identifier and the hash of his avatar.
+     * You can precise the wanted extension as first parameter: .jpg, .jpeg, .png, .webp, .gif
      *
+     * @param string $extension
      * @return string|null
      */
-    public function getAvatarUrl(): ?string
+    public function getAvatarUrl(string $extension = '.png'): ?string
     {
+        if (!in_array($extension, ['.jpg', '.jpeg', '.png', '.webp', '.gif']))
+            throw new InvalidArgumentException('The avatar extension is invalid!');
         if ($this->getId() == null || $this->getAvatarHash() == null) return null;
         return DiscordProvider::DISCORD_CDN . '/' . $this->getId() . '/' . $this->getAvatarHash() . $extension;
     }
